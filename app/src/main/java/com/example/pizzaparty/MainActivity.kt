@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.RadioGroup;
+import android.widget.RadioGroup
 import kotlin.math.ceil
 import android.util.Log
 
