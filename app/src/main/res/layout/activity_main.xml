@@ -38,30 +38,12 @@
             android:layout_marginTop="20dp"
             android:text="@string/how_hungry"
             android:textSize="24sp"
-            android:labelFor="@id/hungry_radio_group" />
+            android:labelFor="@id/hungry_spinner" />
 
-        <RadioGroup
-            android:id="@+id/hungry_radio_group"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <RadioButton
-                android:id="@+id/light_radio_button"
-                android:text="@string/light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RadioButton
-                android:id="@+id/medium_radio_button"
-                android:text="@string/medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true" />
-            <RadioButton
-                android:id="@+id/ravenous_radio_button"
-                android:text="@string/ravenous"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RadioGroup>
+        <Spinner
+            android:id="@+id/hungry_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/num_pizzas_text_view"

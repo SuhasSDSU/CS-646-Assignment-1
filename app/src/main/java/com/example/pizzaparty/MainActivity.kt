@@ -3,10 +3,8 @@ package com.example.pizzaparty
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.RadioGroup
 import android.util.Log
+import android.widget.*
 
 const val TAG = "MainActivity"
 
@@ -14,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var numAttendEditText: EditText
     private lateinit var numPizzasTextView: TextView
-    private lateinit var howHungryRadioGroup: RadioGroup
+    private lateinit var howHungrySpinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"On create Invoked")
         numAttendEditText = findViewById(R.id.num_attend_edit_text)
         numPizzasTextView = findViewById(R.id.num_pizzas_text_view)
-        howHungryRadioGroup = findViewById(R.id.hungry_radio_group)
+        howHungrySpinner = findViewById(R.id.hungry_spinner)
     }
 
     fun calculateClick(view: View) {
@@ -32,19 +30,36 @@ class MainActivity : AppCompatActivity() {
         // Convert the text into an integer
         val numAttend = numAttendStr.toIntOrNull() ?: 0
 
-        // Get hunger level selection
-        val hungerLevel = when (howHungryRadioGroup.getCheckedRadioButtonId()) {
-            R.id.light_radio_button -> PizzaCalculator.HungerLevel.LIGHT
-            R.id.medium_radio_button -> PizzaCalculator.HungerLevel.MEDIUM
-            else -> PizzaCalculator.HungerLevel.RAVENOUS
+        val spinner = findViewById<Spinner>(R.id.hungry_spinner)
+        val adapter = ArrayAdapter.createFromResource(
+            this, R.array.hungry_array, android.R.layout.simple_spinner_dropdown_item)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter;
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val item = parent?.getItemAtPosition(position) as String
+                Toast.makeText(this@MainActivity, item, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        // Get the number of pizzas needed
-        val calc = PizzaCalculator(numAttend, hungerLevel)
-        val totalPizzas = calc.totalPizzas
+        // Get hunger level selection
+         val hungerLevel = when (howHungrySpinner.getSelectedItemPosition()) {
+            R.id.hungry_spinner -> PizzaCalculator.HungerLevel.LIGHT
+            R.id.hungry_spinner -> PizzaCalculator.HungerLevel.MEDIUM
+            else -> PizzaCalculator.HungerLevel.RAVENOUS
+         };
 
-        // Place totalPizzas into the string resource and display
-        val totalText = getString(R.string.total_pizzas, totalPizzas)
-        numPizzasTextView.setText(totalText)
+        // Get the number of pizzas needed
+         val calc = PizzaCalculator(numAttend, hungerLevel)
+         val totalPizzas = calc.totalPizzas
+
+//         Place totalPizzas into the string resource and display
+         val totalText = getString(R.string.total_pizzas, totalPizzas)
+
+         numPizzasTextView.setText(totalText)
     }
 }
