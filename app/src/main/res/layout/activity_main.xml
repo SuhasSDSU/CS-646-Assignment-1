@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/number_of_people"
             android:textSize="@dimen/text_size"
-          />
+            />
         <EditText
             android:id="@+id/num_attend_edit_text"
             android:layout_width="wrap_content"
