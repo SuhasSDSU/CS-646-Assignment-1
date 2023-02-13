@@ -10,12 +10,20 @@ import android.util.Log
 
 const val TAG = "MainActivity"
 
+/**
+ * TODO
+ *
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var numAttendEditText: EditText
     private lateinit var numPizzasTextView: TextView
     private lateinit var howHungryRadioGroup: RadioGroup
 
+    /**
+     * TODO
+     * @param savedInstanceState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         howHungryRadioGroup = findViewById(R.id.hungry_radio_group)
     }
 
+    /**
+     * TODO
+     *
+     * @param view
+     */
     fun calculateClick(view: View) {
         // Get the text that was typed into the EditText
         val numAttendStr = numAttendEditText.text.toString()

@@ -4,6 +4,15 @@ import kotlin.math.ceil
 
 const val SLICES_PER_PIZZA = 8
 
+/**
+ * TODO
+ *
+ * @property hungerLevel
+ * @constructor
+ * TODO
+ *
+ * @param partySize
+ */
 class PizzaCalculator(partySize: Int, var hungerLevel: HungerLevel) {
     var partySize = 0
         set(value) {
